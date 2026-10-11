@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GÁBI | Na Vlně Regenerace</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --color-cream: #EFE8D8;
+            --color-teal: #2A7B76;
+            --color-teal-light: #48A39D;
+            --color-gold: #C5A059;
+            --color-gold-headline: #C9A96E;
+            --color-teal-subhead: #72AEA7;
+            --color-charcoal: #3E3A35;
+            --color-almond: #5C4A3D;
+            --color-cream-text: #FDFBF7;
+
+            --panel-w: 99mm;
+            --panel-h: 210mm;
+            --safety-margin: 5mm;
+            --bleed: 3mm;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--color-charcoal);
+            background-color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15mm;
+            padding: 15mm 0;
+        }
+
+        @page {
+            size: 303mm 216mm;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                background: none;
+                gap: 0;
+                padding: 0;
+            }
+
+            .page {
+                box-shadow: none;
+                margin: 0;
+                page-break-after: always;
+            }
+        }
+
+        .page {
+            width: 297mm;
+            height: 210mm;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .side-a,
+        .side-b {
+            display: grid;
+            width: 303mm;
+            height: 216mm;
+            padding: var(--bleed);
+        }
+
+        .side-a {
+            grid-template-columns: var(--panel-w) var(--panel-w) var(--panel-w);
+        }
+
+        .side-b {
+            grid-template-columns: var(--panel-w) var(--panel-w) var(--panel-w);
+            grid-template-rows: 184mm 26mm;
+        }
+
+        .panel {
+            position: relative;
+            width: var(--panel-w);
+        }
+
+        .panel-content {
+            position: absolute;
+            top: var(--safety-margin);
+            left: var(--safety-margin);
+            right: var(--safety-margin);
+            bottom: var(--safety-margin);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Panels 4–6: slightly widen all text content for a calmer editorial feel */
+        #panel-4 .panel-content,
+        #panel-5 .panel-content,
+        #panel-6 .panel-content {
+            letter-spacing: 0.02em;
+        }
+
+        .bg-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Bleed */
+        .side-a .bg-placeholder {
+            top: calc(-1 * var(--bleed));
+            height: calc(100% + 2 * var(--bleed));
+        }
+
+        .side-b .bg-placeholder {
+            top: calc(-1 * var(--bleed));
+            height: calc(100% + var(--bleed));
+        }
+
+        #panel-3 .bg-placeholder,
+        #panel-4 .bg-placeholder {
+            left: calc(-1 * var(--bleed));
+            width: calc(100% + var(--bleed));
+        }
+
+        #panel-1 .bg-placeholder,
+        #panel-6 .bg-placeholder {
+            width: calc(100% + var(--bleed));
+        }
+
+        .bg-cream {
+            background-color: var(--color-cream) !important;
+        }
+
+        .bg-almond {
+            background-color: var(--color-almond) !important;
+        }
+
+        .logo-img {
+            display: block;
+            margin: 0 auto;
+            object-fit: contain;
+            background: transparent;
+            filter: none;
+            mix-blend-mode: normal;
+        }
+
+        .cover-content .logo-img {
+            opacity: 1;
+            filter: none;
+            background: transparent;
+        }
+
+        /* Cover */
+        .cover-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            /* was: center */
+            padding-top: 20mm;
+            /* was: 5mm — pushes cover-top down slightly */
+            gap: 15mm;
+            /* unchanged — this is still the anchor gap */
+            text-align: center;
+        }
+
+        .cover-top,
+        .cover-bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cover-headline {
+            font-weight: 300;
+            font-size: 12.5pt;
+            letter-spacing: 0.06em;
+            line-height: 1.1;
+            margin: 3mm 0;
+            color: var(--color-gold-headline);
+            white-space: nowrap;
+        }
+
+        .cover-subhead {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 28.9pt;
+            color: var(--color-teal-subhead);
+            font-style: normal;
+            margin-bottom: 2mm;
+        }
+
+        .cover-tagline {
+            font-weight: 300;
+            font-style: italic;
+            font-size: 15.1pt;
+            color: var(--color-gold-headline);
+            opacity: 0.9;
+        }
+
+        /* Typography - LEFT ALIGNED */
+        .heading-main {
+            font-weight: 800;
+            font-size: 17pt;
+            letter-spacing: 0.015em;
+            color: var(--color-charcoal);
+            margin-bottom: 2.5mm;
+            line-height: 1.15;
+            text-align: left;
+            text-wrap: balance;
+        }
+
+        .heading-sub {
+            font-weight: 600;
+            font-size: 10.5pt;
+            line-height: 1.25;
+            letter-spacing: 0.01em;
+            color: var(--color-teal);
+            margin-bottom: 1mm;
+            margin-top: 0.5mm;
+            text-align: left;
+            text-wrap: balance;
+        }
+
+        .body-text {
+            font-weight: 450;
+            font-size: 9.3pt;
+            line-height: 1.35;
+            color: var(--color-charcoal);
+            margin-bottom: 2mm;
+            text-align: left;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 2mm 0;
+        }
+
+        .checklist li {
+            font-weight: 450;
+            font-size: 9.3pt;
+            line-height: 1.3;
+            margin-bottom: 1.3mm;
+            padding-left: 4mm;
+            position: relative;
+            text-align: left;
+        }
+
+        .checklist li::before {
+            content: "✓";
+            color: var(--color-teal);
+            font-weight: 700;
+            position: absolute;
+            left: 0;
+            font-size: 9.8pt;
+        }
+
+        .checklist li strong {
+            font-weight: 600;
+        }
+
+        .checklist-compact {
+            margin: 0.5mm 0;
+        }
+
+        .checklist-compact li {
+            line-height: 1.15;
+            margin-bottom: 0.6mm;
+        }
+
+        .combo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .combo-list li {
+            font-weight: 450;
+            font-size: 9.3pt;
+            line-height: 1.3;
+            margin-bottom: 1.8mm;
+            padding-left: 4mm;
+            position: relative;
+            text-align: left;
+            color: var(--color-charcoal);
+        }
+
+        .combo-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .combo-list li::before {
+            content: "·";
+            color: var(--color-teal);
+            font-weight: 700;
+            position: absolute;
+            left: 0;
+            top: -1.5mm;
+            font-size: 16pt;
+            line-height: 1;
+        }
+
+        .combo-list li strong {
+            font-weight: 600;
+        }
+
+        .combo-compact li {
+            line-height: 1.15;
+            margin-bottom: 0.8mm;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 8mm;
+            padding: 2.5mm 3.5mm;
+            margin: 1.5mm 0;
+            border: 0.5px solid rgba(42, 123, 118, 0.15);
+        }
+
+        .quote-box {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5mm;
+            margin: auto 0;
+        }
+
+        .quote-wave {
+            width: 43.2mm;
+            height: 6mm;
+            display: block;
+        }
+
+        .quote-box p {
+            font-weight: 600;
+            font-style: italic;
+            color: var(--color-teal);
+            font-size: 13.5pt;
+            line-height: 1.45;
+        }
+
+        .callout-box {
+            background: var(--color-cream);
+            border: 0.5px solid rgba(42, 123, 118, 0.18);
+            border-radius: 2mm;
+            padding: 2mm 2.5mm;
+            margin-top: auto;
+            color: var(--color-charcoal);
+        }
+
+        .content-block {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-pill {
+            display: inline-block;
+            background: var(--color-charcoal);
+            color: white;
+            font-weight: 700;
+            font-size: 9pt;
+            padding: 1mm 3mm;
+            border-radius: 3mm;
+            margin-left: 1.5mm;
+            vertical-align: middle;
+        }
+
+        .callout-box h4,
+        .callout-box p {
+            color: var(--color-charcoal);
+        }
+
+        .disclaimer {
+            font-weight: 450;
+            font-size: 7.5pt;
+            line-height: 1.35;
+            color: var(--color-charcoal);
+            margin-top: auto;
+            padding-top: 1.5mm;
+            border-top: 0.5px solid #dcd6c8;
+            text-align: left;
+        }
+
+        .center-back-content {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 4mm;
+        }
+
+        .caption-band {
+            font-weight: 600;
+            font-size: 7pt;
+            letter-spacing: 0.06em;
+            color: var(--color-charcoal);
+        }
+
+        /* Contact Strip */
+        .contact-strip {
+            grid-column: 1 / -1;
+            grid-row: 2;
+            background: var(--color-almond);
+            color: var(--color-cream);
+            display: grid;
+            grid-template-columns: var(--panel-w) var(--panel-w) var(--panel-w);
+            align-items: center;
+            z-index: 3;
+            position: relative;
+        }
+
+        /* Bleed: one continuous shape under the strip (no seam at the trim line) */
+        .contact-strip::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: calc(-1 * var(--bleed));
+            right: calc(-1 * var(--bleed));
+            bottom: calc(-1 * var(--bleed));
+            background: var(--color-almond);
+            z-index: -1;
+        }
+
+        .contact-strip .col {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3mm;
+            text-align: center;
+            padding: 0 3mm;
+            min-width: 0;
+        }
+
+        .contact-strip .col:first-child {
+            margin-left: var(--safety-margin);
+        }
+
+        .contact-strip .label {
+            font-weight: 600;
+            font-size: 12.5pt;
+            line-height: 1.15;
+            color: var(--color-cream-text);
+        }
+
+        .contact-strip .text {
+            font-size: 12.5pt;
+            font-weight: 300;
+            line-height: 1.15;
+        }
+
+        .contact-strip .center-col {
+            text-align: center;
+            align-items: center;
+        }
+
+        .contact-strip .icon-line {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.2mm;
+        }
+
+        .contact-strip .icon-line svg {
+            width: 3mm;
+            height: 3mm;
+            flex-shrink: 0;
+        }
+        .contact-strip .right-col {
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5mm;
+            align-self: stretch;
+            margin: 0;
+            padding: 0 var(--safety-margin);
+            background: var(--color-cream);
+            color: var(--color-charcoal);
+            position: relative;
+        }
+
+        /* Bleed: continues right and down past the trim edge */
+        .contact-strip .right-col::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: calc(-1 * var(--bleed));
+            bottom: calc(-1 * var(--bleed));
+            background: var(--color-cream);
+            z-index: -1;
+        }
+
+        .contact-strip .right-col .logo-img {
+            width: 12mm;
+            height: 12mm;
+            margin: 0;
+        }
+
+        .teal-badge {
+            background: var(--color-teal-light);
+            color: white;
+            padding: 1.5mm 2.5mm;
+            border-radius: 1.5mm;
+            font-size: 10pt;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            text-align: center;
+        }
+
+        /* Decorative Eucalyptus branches - Panel 3 */
+        .decorative-eucalyptus {
+            position: absolute;
+            width: 165mm;
+            height: auto;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .eucalyptus-top-right {
+            top: -6mm;
+            right: -10mm;
+            /* GIMP: rotate 155° clockwise == CSS rotate(155deg) (same clockwise convention) */
+            transform: rotate(155deg);
+            transform-origin: center center;
+        }
+
+        .eucalyptus-bottom-left {
+            bottom: -8mm;
+            left: -10mm;
+            /* GIMP: rotate 330° clockwise == CSS rotate(330deg) (same clockwise convention) */
+            transform: rotate(330deg);
+            transform-origin: center center;
+        }
+
+        /* Decorative Wave - Refined to look like flowing ribbons */
+        .decorative-wave {
+            position: absolute;
+            bottom: calc(20mm + var(--bleed));
+            /* Lifted slightly off the bottom edge */
+            left: 0;
+            width: calc(198mm + var(--bleed));
+            /* Spans exactly 2 panels (Panel 3 + Panel 2) */
+            height: 22mm;
+            z-index: 1;
+            pointer-events: none;
+            background-image: url('signature_waves.svg');
+            background-repeat: repeat-x;
+            background-position: var(--bleed) center;
+            /* one tile = exactly one panel width; adjust if the SVG's own width differs from 99mm */
+            background-size: 99mm 35mm;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page side-a">
+        <div class="panel" id="panel-3">
+            <div class="bg-placeholder bg-cream" style="background: linear-gradient(135deg, #EFE8D8 0%, #DCE4D8 100%);">
+            </div>
+            <img src="eucalyptus.png" class="decorative-eucalyptus eucalyptus-top-right" alt="">
+            <img src="eucalyptus.png" class="decorative-eucalyptus eucalyptus-bottom-left" alt="">
+            <div class="panel-content"></div>
+        </div>
+
+        <div class="panel" id="panel-2">
+            <div class="bg-placeholder bg-cream"></div>
+            <div class="panel-content center-back-content">
+                <img src="vlny.svg" class="logo-img" style="width: 38mm; height: 38mm;" alt="Logo">
+                <div class="caption-band">DOTYK · ZPOMALENÍ · PÉČE · REGENERACE</div>
+            </div>
+        </div>
+
+        <div class="panel" id="panel-1">
+            <div class="bg-placeholder bg-almond"></div>
+            <div class="panel-content cover-content">
+
+                <div class="cover-top">
+                    <h1 class="cover-headline">GÁBI | NA VLNĚ REGENERACE</h1>
+                    <img src="vlny-to-dark.svg" class="logo-img" style="width: 55mm; height: 55mm; margin-top: 4mm;"
+                        alt="Logo">
+                </div>
+
+                <div class="cover-bottom">
+                    <p class="cover-subhead">Masáže & Frekvenční péče</p>
+                    <p class="cover-tagline">Když se dotek spojí s energií.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Signature Wave (Panel 3 + Panel 2), tiled 2x across the 198mm span -->
+        <div class="decorative-wave" role="presentation"></div>
+    </div>
+
+    <div class="page side-b">
+        <div class="panel" id="panel-4" style="grid-row: 1;">
+            <div class="bg-placeholder bg-cream"></div>
+            <div class="panel-content">
+                <h2 class="heading-main">Frekvenční péče plasmového generátoru</h2>
+
+                <p class="body-text">
+                    Lidské tělo a vše živé kolem nás, i uvnitř nás, vysílá své vlastní frekvence. Plasmový generátor
+                    tyto frekvence přijímá, ale rovněž vysílá jemné, přesně cílené frekvenční vlny, které prostupují
+                    celým tělem až k jednotlivým buňkám. Umožňuje tak našemu tělu nejen regenerovat, ale v dokonalé
+                    frekvenční vlně i eliminovat nežádoucí mikroskopickou zátěž. Tělo tak dostává příležitost odložit
+                    vše zbytečné, čímž dochází k aktivaci imunitního systému, který pomůže tyto oslabené vlivy z
+                    organismu s lehkostí vyloučit.
+                </p>
+                <p class="body-text">
+                    Frekvenční vlny mohou tělo v celém procesu velmi jemně podpořit a vyladit tak, aby došlo k dokonalé
+                    regeneraci a návratu k přirozené síle.
+                </p>
+
+                <div class="info-box">
+                    <h3 class="heading-sub"
+                        style="margin-top:0; font-size: 8pt; font-weight: 700; color: var(--color-charcoal);">Z bohaté
+                        škály podporujících a regeneračních programů vybírám pro ukázku:</h3>
+                    <ul class="checklist">
+                        <li>posílení ledvin jako hlavního zdroje naší vitality</li>
+                        <li>regenerační vlna pro lehkost vašeho dechu</li>
+                        <li>ladění lymfatického, nervového nebo hormonálního systému</li>
+                        <li>trénink k posílení imunitního systému</li>
+                        <li>vyladění vnitřního mikrobiomu</li>
+                        <li>úleva od bolesti a napětí pohybového aparátu</li>
+                    </ul>
+                </div>
+
+                <p class="disclaimer">
+                    Upozornění: jedno sezení nemusí být vždy dostačující a je potřeba působení frekvencí opakovat.
+                    Ideální je 3x v intervalu max. 5 dní. Plazmový generátor Rifetech je experimentální přístroj a
+                    nenahrazuje lékařskou péči, není zamýšlen k léčení nemocí. Není zdravotnický prostředek.
+                </p>
+            </div>
+        </div>
+
+        <div class="panel" id="panel-5" style="grid-row: 1;">
+            <div class="bg-placeholder bg-cream"></div>
+            <div class="panel-content">
+                <h2 class="heading-main">Masáže & Pečující Doteky</h2>
+
+                <p class="body-text"
+                    style="font-style: italic; color: var(--color-teal); font-weight: 300;">
+                    Masáž, která dává tělu prostor zpomalit. Každá péče vzniká podle toho, co vaše tělo právě potřebuje.
+                </p>
+
+                <ul class="checklist">
+                    <li><strong>Relaxační & regenerační masáže:</strong> pro unavené, namáhané a zatuhlé svaly. Dotek
+                        pomáhá uvolnit napětí, prohřát tělo a navodit příjemný pocit lehkosti.</li>
+                    <li><strong>Access Bars:</strong> jemná dotyková péče 32 bodů na hlavě, při které se uvolní a ztiší
+                        každodenní proud myšlenek a přichází hluboký stav klidu.</li>
+                    <li><strong>Čínská masáž nohou An Mo:</strong> chodidla nesou váhu celého těla každým dnem a přesto
+                        jim věnujeme nejméně pozornosti. Odměňte je hlubokou regenerací, která jim navrátí energii a
+                        sílu pro každý další krok.</li>
+                    <li><strong>Lifting Pamper Face:</strong> pečující masáž obličeje, krku a dekoltu, která propojuje
+                        jemný dotek s liftingovými a relaxačními prvky. Prosvětluje unavené rysy, uvolňuje napětí a
+                        zanechává tvář viditelně vypnutou a plnou života.</li>
+                </ul>
+
+                <div class="quote-box">
+                    <svg class="quote-wave" viewBox="0 0 96 16" preserveAspectRatio="none"><path d="M0 8 C 3.6 4.8, 8.4 4.8, 12 8 C 15.6 11.2, 20.4 11.2, 24 8 C 27.6 4.8, 32.4 4.8, 36 8 C 39.6 11.2, 44.4 11.2, 48 8 C 51.6 4.8, 56.4 4.8, 60 8 C 63.6 11.2, 68.4 11.2, 72 8 C 75.6 4.8, 80.4 4.8, 84 8 C 87.6 11.2, 92.4 11.2, 96 8" fill="none" stroke="var(--color-charcoal)" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <p>"Nalaďte se se mnou na vlnu RADOSTI, LEHKOSTI a VDĚČNOSTI."</p>
+                    <svg class="quote-wave" viewBox="0 0 96 16" preserveAspectRatio="none"><path d="M0 8 C 3.6 4.8, 8.4 4.8, 12 8 C 15.6 11.2, 20.4 11.2, 24 8 C 27.6 4.8, 32.4 4.8, 36 8 C 39.6 11.2, 44.4 11.2, 48 8 C 51.6 4.8, 56.4 4.8, 60 8 C 63.6 11.2, 68.4 11.2, 72 8 C 75.6 4.8, 80.4 4.8, 84 8 C 87.6 11.2, 92.4 11.2, 96 8" fill="none" stroke="var(--color-charcoal)" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel" id="panel-6" style="grid-row: 1;">
+            <div class="bg-placeholder bg-cream"></div>
+            <div class="panel-content">
+                <div class="content-block">
+                    <h2 class="heading-main">BEMER — energie a výživa pro každou buňku</h2>
+                    <p class="heading-sub"
+                        style="font-style: italic; font-weight: 400; margin-top: -1.5mm;">
+                        Certifikovaná
+                        neinvazivní péče</p>
+
+                    <p class="body-text" style="margin-bottom: 1mm;">
+                        BEMER je jemná, neinvazivní metoda, která pomocí cílených nízkofrekvenčních elektromagnetických
+                        pulzů rozproudí život v těch nejjemnějších vlásečnicích našeho těla. Otvírá cestu k přirozené
+                        obnově
+                        buněčné energie – buňky získávají maximální přísun kyslíku i živin, zatímco nahromaděné odpadní
+                        látky mohou z těla v lehkosti odejít.
+                    </p>
+
+                    <ul class="checklist checklist-compact">
+                        <li>uvolňuje svalové napětí a dodává buňkám novou energii</li>
+                        <li>zmírňuje chronické i akutní bolesti zad, kloubů a svalů</li>
+                        <li>napomáhá k rychlejší regeneraci po úrazech, operacích a sportovním výkonu</li>
+                        <li>zkvalitňuje spánek a celkově posiluje přirozenou obranyschopnost organismu</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3 class="heading-sub"
+                        style="margin-top: 1mm; font-weight: 700; color: var(--color-charcoal);">
+                        HARMONICKÉ SYNERGIE</h3>
+                    <p class="heading-sub"
+                        style="font-style: italic; font-weight: 400; margin-top: -1.5mm;">
+                        Když se péče propojí v dokonalý rituál</p>
+                    <ul class="combo-list combo-compact">
+                        <li><strong>Kombinace: Plasma +
+                                BEMER</strong> — Frekvence plasmy citlivě uvolní nežádoucí zátěž, zatímco BEMER
+                            okamžitě probudí
+                            mikrocirkulaci a pomůže tělu vše hladce a přirozeně odplavit.</li>
+                        <li><strong>Kombinace: Masáž +
+                                BEMER</strong> — Pár minut s přístrojem BEMER před masáží dokáže zázraky. Pulzní vlny
+                            před
+                            masáží jemně probudí život v nejmenších vlásečnicích, prohřejí tkáně zevnitř a uvolní
+                            jejich
+                            napětí.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="callout-box">
+                    <h4 style="font-weight: 700; font-size: 9.5pt; margin-bottom: 1mm;">Výměna a odměna</h4>
+                    <p class="body-text" style="line-height: 1.25; margin: 0; text-align: left;">
+                        Věřím, že péče o tělo je vzájemným sdílením energie a času. Svoji hodinovou péči, během které
+                        plně propojuji masáže, frekvenční regeneraci i přístroj BEMER na míru vašim potřebám, si cením
+                        na: <span class="price-pill">800 KČ / hodina</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-strip">
+            <div class="col">
+                <span class="label icon-line"><svg viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z M12 12.5m-2.5 0a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0"/></svg>Kde mě najdete & Kontakt —</span>
+                <span class="text">GÁBI | Na Vlně Regenerace,</span>
+                <span class="text">Gabriela Máchová,</span>
+                <span class="text">Kpt. Jaroše 5089/22, Ostrava Třebovice</span>
+            </div>
+            <div class="col center-col">
+                <span class="label"> REZERVACE VAŠÍ REGENERAČNÍ VLNY</span>
+                <span class="text icon-line"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 3.7c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8z"/></svg>+420 777 525 590</span>
+                <span class="text icon-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>vlny.regenerace@seznam.cz</span>
+            </div>
+            <div class="col right-col">
+                <img src="vlny.svg" class="logo-img" alt="Logo">
+                <span class="teal-badge">DOTYK · ZPOMALENÍ · PÉČE · REGENERACE</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
