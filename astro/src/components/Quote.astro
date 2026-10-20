@@ -1,0 +1,21 @@
+---
+import { quote } from "../data/content";
+---
+<section class="quote" aria-label="Motto">
+  <div class="container inner">
+    <svg class="w" viewBox="0 0 96 16" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 8 C 3.6 4.8, 8.4 4.8, 12 8 C 15.6 11.2, 20.4 11.2, 24 8 C 27.6 4.8, 32.4 4.8, 36 8 C 39.6 11.2, 44.4 11.2, 48 8 C 51.6 4.8, 56.4 4.8, 60 8 C 63.6 11.2, 68.4 11.2, 72 8 C 75.6 4.8, 80.4 4.8, 84 8 C 87.6 11.2, 92.4 11.2, 96 8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+    </svg>
+    <blockquote>„{quote}“</blockquote>
+    <svg class="w" viewBox="0 0 96 16" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 8 C 3.6 4.8, 8.4 4.8, 12 8 C 15.6 11.2, 20.4 11.2, 24 8 C 27.6 4.8, 32.4 4.8, 36 8 C 39.6 11.2, 44.4 11.2, 48 8 C 51.6 4.8, 56.4 4.8, 60 8 C 63.6 11.2, 68.4 11.2, 72 8 C 75.6 4.8, 80.4 4.8, 84 8 C 87.6 11.2, 92.4 11.2, 96 8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+    </svg>
+  </div>
+</section>
+
+<style>
+  .quote { background: var(--teal); color: var(--cream-text); padding-block: clamp(3.5rem, 8vw, 6rem); }
+  .inner { display: grid; justify-items: center; gap: 1.75rem; text-align: center; }
+  blockquote { font-size: var(--step-3); font-style: italic; font-weight: 600; line-height: 1.3; max-width: 22ch; text-wrap: balance; }
+  .w { width: 6rem; height: 1rem; color: var(--cream); opacity: 0.8; }
+</style>

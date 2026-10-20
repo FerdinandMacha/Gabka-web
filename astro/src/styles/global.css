@@ -1,0 +1,98 @@
+:root {
+  /* Brand palette (from the brochure) */
+  --cream: #EFE8D8;
+  --cream-light: #F7F2E7;
+  --teal: #2A7B76;
+  --teal-deep: #1F6661;   /* small text on cream: passes AA */
+  --teal-soft: #72AEA7;
+  --gold: #C9A96E;
+  --charcoal: #3E3A35;
+  --almond: #5C4A3D;
+  --cream-text: #FDFBF7;
+
+  --font: "Montserrat Variable", "Montserrat", system-ui, sans-serif;
+
+  /* Fluid type scale */
+  --step--1: clamp(0.85rem, 0.82rem + 0.15vw, 0.95rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --step-1: clamp(1.2rem, 1.1rem + 0.5vw, 1.5rem);
+  --step-2: clamp(1.6rem, 1.3rem + 1.4vw, 2.4rem);
+  --step-3: clamp(2.1rem, 1.5rem + 2.8vw, 3.6rem);
+  --step-4: clamp(2.5rem, 1.6rem + 3.6vw, 4.25rem);
+
+  --space-section: clamp(4rem, 9vw, 7.5rem);
+  --max: 72rem;
+  --measure: 62ch;
+  --header-h: 4.5rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 1rem);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font);
+  font-size: var(--step-0);
+  font-weight: 450;
+  line-height: 1.65;
+  color: var(--charcoal);
+  background: var(--cream);
+  text-rendering: optimizeLegibility;
+}
+
+img, svg { display: block; max-width: 100%; height: auto; }
+
+h1, h2, h3 { line-height: 1.15; text-wrap: balance; }
+h1, h2 { font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: var(--step-3); color: var(--charcoal); }
+h3 { font-size: var(--step-1); font-weight: 650; color: var(--teal-deep); }
+p { max-width: var(--measure); text-wrap: pretty; }
+
+a { color: var(--teal-deep); text-underline-offset: 0.2em; }
+a:hover { color: var(--teal); }
+
+:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.container { width: min(100% - 2.5rem, var(--max)); margin-inline: auto; }
+.section { padding-block: var(--space-section); position: relative; }
+.lead { font-size: var(--step-1); font-weight: 400; line-height: 1.5; color: var(--almond); }
+.lead--italic { font-style: italic; font-weight: 300; color: var(--teal-deep); }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.85em 1.7em; border-radius: 999px; border: 2px solid transparent;
+  font: inherit; font-weight: 650; font-size: var(--step--1); letter-spacing: 0.02em;
+  text-decoration: none; cursor: pointer;
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.btn--solid { background: var(--teal); color: var(--cream-text); }
+.btn--solid:hover { background: var(--teal-deep); color: var(--cream-text); }
+.btn--ghost { border-color: currentColor; background: transparent; }
+.btn--on-dark { color: var(--cream-text); }
+.btn--on-dark.btn--ghost:hover { background: var(--cream-text); color: var(--almond); }
+
+.checklist { list-style: none; padding: 0; display: grid; gap: 0.7rem; }
+.checklist li { position: relative; padding-left: 1.7rem; }
+.checklist li::before {
+  content: "✓"; position: absolute; left: 0; top: 0;
+  font-weight: 700; color: var(--teal);
+}
+
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

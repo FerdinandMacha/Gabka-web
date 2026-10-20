@@ -1,0 +1,42 @@
+---
+import logo from "../assets/vlny-to-dark.svg";
+import { site } from "../data/content";
+---
+<section class="contact" id="kontakt" aria-labelledby="kontakt-title">
+  <div class="container grid">
+    <div class="info">
+      <h2 id="kontakt-title">Rezervace vaší regenerační vlny</h2>
+
+      <div class="channels">
+        <a class="big" href={site.phoneHref}>{site.phone}</a>
+        <a class="big" href={`mailto:${site.email}`}>{site.email}</a>
+      </div>
+
+      <address>
+        <strong>{site.name}</strong><br />
+        {site.owner}<br />
+        {site.address.street}, {site.address.city}
+      </address>
+
+      <a class="btn btn--ghost btn--on-dark" href={site.mapUrl} target="_blank" rel="noopener">Zobrazit na mapě</a>
+    </div>
+
+    <img class="logo" src={logo.src} alt="" width="260" height="262" loading="lazy" />
+  </div>
+</section>
+
+<style>
+  .contact { background: var(--almond); color: var(--cream-text); padding-block: var(--space-section); }
+  .contact h2 { color: var(--cream-text); max-width: 16ch; }
+  .grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+  .info { display: grid; gap: 2rem; justify-items: start; }
+  .channels { display: grid; gap: 0.5rem; }
+  .big { color: var(--cream-text); font-size: var(--step-2); font-weight: 600; text-decoration-thickness: 1px; overflow-wrap: anywhere; }
+  .big:hover { color: var(--gold); }
+  address { font-style: normal; line-height: 1.7; }
+  .logo { width: min(100%, 17rem); justify-self: center; }
+  @media (max-width: 52rem) {
+    .grid { grid-template-columns: 1fr; }
+    .logo { justify-self: start; width: 9rem; }
+  }
+</style>

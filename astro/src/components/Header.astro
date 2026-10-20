@@ -1,0 +1,86 @@
+---
+import logo from "../assets/vlny.svg";
+import { nav, site } from "../data/content";
+---
+<header class="header">
+  <div class="container bar">
+    <a class="brand" href="#top" aria-label={`${site.name} – zpět nahoru`}>
+      <img src={logo.src} alt="" width="44" height="44" />
+      <span class="brand-text">
+        <strong>Gábi</strong>
+        <span>Na Vlně Regenerace</span>
+      </span>
+    </a>
+
+    <button class="toggle" type="button" aria-expanded="false" aria-controls="menu">
+      <span class="visually-hidden">Menu</span>
+      <span class="bars" aria-hidden="true"></span>
+    </button>
+
+    <nav id="menu" class="menu" aria-label="Hlavní navigace">
+      <ul>
+        {nav.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+      <a class="btn btn--solid" href={site.phoneHref}>Zavolat</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--cream) 92%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgb(92 74 61 / 0.12);
+  }
+  .bar { display: flex; align-items: center; justify-content: space-between; min-height: var(--header-h); gap: 1rem; }
+  .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--charcoal); }
+  .brand-text { display: grid; line-height: 1.1; }
+  .brand-text strong { font-size: 1.15rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+  .brand-text span { font-size: 0.78rem; font-weight: 500; color: var(--almond); }
+
+  .menu { display: flex; align-items: center; gap: 1.75rem; }
+  .menu ul { display: flex; gap: 1.5rem; list-style: none; padding: 0; }
+  .menu li a { color: var(--charcoal); text-decoration: none; font-weight: 600; font-size: var(--step--1); padding-block: 0.4rem; border-bottom: 2px solid transparent; }
+  .menu li a:hover { border-color: var(--teal); }
+  .menu .btn { padding: 0.6em 1.3em; }
+
+  .toggle { display: none; background: none; border: 0; padding: 0.75rem; margin-right: -0.75rem; cursor: pointer; }
+  .bars, .bars::before, .bars::after { display: block; width: 1.5rem; height: 2px; background: var(--charcoal); transition: transform .2s, background-color .2s; }
+  .bars { position: relative; }
+  .bars::before, .bars::after { content: ""; position: absolute; left: 0; }
+  .bars::before { top: -7px; }
+  .bars::after { top: 7px; }
+  .toggle[aria-expanded="true"] .bars { background: transparent; }
+  .toggle[aria-expanded="true"] .bars::before { transform: translateY(7px) rotate(45deg); }
+  .toggle[aria-expanded="true"] .bars::after { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (max-width: 52rem) {
+    .toggle { display: block; }
+    .menu {
+      display: none; position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 1rem;
+      padding: 1.25rem 1.25rem 1.75rem; background: var(--cream);
+      border-bottom: 1px solid rgb(92 74 61 / 0.12);
+    }
+    .menu.open { display: flex; }
+    .menu ul { flex-direction: column; gap: 0.25rem; }
+    .menu li a { display: block; font-size: var(--step-0); padding-block: 0.7rem; border: 0; }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>(".toggle");
+  const menu = document.getElementById("menu");
+  if (toggle && menu) {
+    const set = (open: boolean) => {
+      toggle.setAttribute("aria-expanded", String(open));
+      menu.classList.toggle("open", open);
+    };
+    toggle.addEventListener("click", () => set(toggle.getAttribute("aria-expanded") !== "true"));
+    menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => set(false)));
+    document.addEventListener("keydown", (e) => e.key === "Escape" && set(false));
+  }
+</script>

@@ -1,0 +1,28 @@
+---
+import waves from "../assets/signature_waves.svg";
+interface Props { animate?: boolean; flip?: boolean; }
+const { animate = false, flip = false } = Astro.props;
+---
+<div
+  class:list={["wave", { animate, flip }]}
+  style={`--wave: url(${waves.src})`}
+  aria-hidden="true"
+></div>
+
+<style>
+  .wave {
+    --h: clamp(3.5rem, 9vw, 6.5rem);
+    --tile: calc(var(--h) * 4.346); /* the SVG is 99 × 22.778 */
+    height: var(--h);
+    background: var(--wave) repeat-x 0 center / var(--tile) var(--h);
+  }
+  .flip { transform: scaleY(-1); }
+
+  /* The one continuous motion on the page: the ribbons drift slowly. */
+  @media (prefers-reduced-motion: no-preference) {
+    .animate { animation: drift 60s linear infinite; }
+  }
+  @keyframes drift {
+    to { background-position-x: calc(var(--tile) * -1); }
+  }
+</style>

@@ -1,0 +1,20 @@
+---
+import { site } from "../data/content";
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="container">
+    <p class="motto">{site.motto}</p>
+    <p class="small">
+      Nabízené služby nenahrazují lékařskou péči. Plazmový generátor Rifetech je experimentální přístroj a není zdravotnický prostředek.
+    </p>
+    <p class="small">© {year} {site.owner} · {site.name}</p>
+  </div>
+</footer>
+
+<style>
+  .footer { background: #4A3B30; color: var(--cream); padding-block: 2.5rem; }
+  .container { display: grid; gap: 0.75rem; }
+  .motto { font-weight: 600; letter-spacing: 0.06em; color: var(--cream-text); }
+  .small { font-size: var(--step--1); opacity: 0.85; max-width: 80ch; }
+</style>

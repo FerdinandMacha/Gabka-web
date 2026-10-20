@@ -1,0 +1,50 @@
+---
+import { bemer, synergies } from "../data/content";
+---
+<section class="section" id="bemer" aria-labelledby="bemer-title">
+  <div class="container">
+    <div class="cols">
+      <div class="text">
+        <h2 id="bemer-title">BEMER – energie a výživa pro každou buňku</h2>
+        <p class="lead lead--italic">{bemer.subtitle}</p>
+        <p>{bemer.text}</p>
+      </div>
+      <ul class="checklist benefits">
+        {bemer.benefits.map((b) => <li>{b}</li>)}
+      </ul>
+    </div>
+
+    <div class="synergies">
+      <header>
+        <h2 class="syn-title">{synergies.title}</h2>
+        <p class="lead lead--italic">{synergies.subtitle}</p>
+      </header>
+      <div class="combos">
+        {synergies.items.map((s) => (
+          <article>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cols { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+  .text { display: grid; gap: 1.25rem; }
+  .benefits { padding-top: 0.5rem; gap: 1.1rem; }
+  .benefits li { padding-bottom: 1.1rem; border-bottom: 1px solid rgb(92 74 61 / 0.2); }
+  .benefits li:last-child { border-bottom: 0; }
+
+  .synergies { margin-top: clamp(4rem, 9vw, 7rem); display: grid; gap: clamp(1.5rem, 4vw, 2.5rem); }
+  .syn-title { font-size: var(--step-2); }
+  .synergies header { display: grid; gap: 0.75rem; }
+  .combos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.5rem, 4vw, 3rem); }
+  .combos article { border-top: 4px solid var(--teal); padding-top: 1.25rem; display: grid; gap: 0.6rem; align-content: start; }
+
+  @media (max-width: 52rem) {
+    .cols, .combos { grid-template-columns: 1fr; }
+  }
+</style>

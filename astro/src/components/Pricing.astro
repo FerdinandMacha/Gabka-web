@@ -1,0 +1,25 @@
+---
+import { pricing, site } from "../data/content";
+---
+<section class="section" id="cenik" aria-labelledby="cenik-title">
+  <div class="container cols">
+    <div class="text">
+      <h2 id="cenik-title">{pricing.title}</h2>
+      <p>{pricing.text}</p>
+    </div>
+
+    <div class="price">
+      <p class="amount">{site.price.amount}<span> / {site.price.unit}</span></p>
+      <a class="btn btn--solid" href={site.phoneHref}>Objednat se</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cols { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+  .text { display: grid; gap: 1.25rem; }
+  .price { background: var(--cream-light); border: 1px solid rgb(42 123 118 / 0.25); border-radius: 1.5rem; padding: clamp(1.75rem, 4vw, 3rem); display: grid; gap: 1.5rem; justify-items: start; }
+  .amount { font-size: var(--step-4); font-weight: 800; color: var(--charcoal); line-height: 1; letter-spacing: -0.02em; }
+  .amount span { font-size: var(--step-1); font-weight: 500; color: var(--almond); letter-spacing: 0; }
+  @media (max-width: 52rem) { .cols { grid-template-columns: 1fr; } }
+</style>

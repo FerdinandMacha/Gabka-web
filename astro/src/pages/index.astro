@@ -1,17 +1,24 @@
 ---
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import Wave from "../components/Wave.astro";
+import Massages from "../components/Massages.astro";
+import Frequency from "../components/Frequency.astro";
+import Bemer from "../components/Bemer.astro";
+import Quote from "../components/Quote.astro";
+import Pricing from "../components/Pricing.astro";
+import Contact from "../components/Contact.astro";
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" media="(prefers-color-scheme: light)" />
-		<link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
-		<link rel="icon" href="/favicon.ico?v=2" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base
+  title="GÁBI | Na Vlně Regenerace – masáže a frekvenční péče, Ostrava Třebovice"
+  description="Relaxační masáže, Access Bars, plasmový generátor a BEMER v Ostravě Třebovicích. Dotek, zpomalení, péče, regenerace."
+>
+  <Hero />
+  <Wave animate />
+  <Massages />
+  <Frequency />
+  <Bemer />
+  <Quote />
+  <Pricing />
+  <Contact />
+</Base>

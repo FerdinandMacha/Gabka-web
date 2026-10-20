@@ -1,0 +1,33 @@
+---
+import logo from "../assets/vlny-to-dark.svg";
+import { site } from "../data/content";
+---
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container grid">
+    <div class="copy">
+      <p class="name">{site.name}</p>
+      <h1 id="hero-title">Masáže &amp; frekvenční péče</h1>
+      <p class="tagline">{site.tagline}</p>
+      <div class="actions">
+        <a class="btn btn--solid" href={site.phoneHref}>Zavolat a rezervovat</a>
+        <a class="btn btn--ghost btn--on-dark" href="#masaze">Co nabízím</a>
+      </div>
+    </div>
+    <img class="logo" src={logo.src} alt="Logo – dvě vlny v kruhu" width="520" height="525" />
+  </div>
+</section>
+
+<style>
+  .hero { background: var(--almond); color: var(--cream-text); padding-block: clamp(3rem, 8vw, 6rem); overflow: hidden; }
+  .grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+  .name { font-weight: 300; font-size: var(--step-0); letter-spacing: 0.06em; color: var(--gold); margin-bottom: 1.25rem; }
+  h1 { font-size: var(--step-4); font-weight: 700; color: var(--teal-soft); letter-spacing: -0.02em; }
+  .tagline { margin-top: 1.5rem; font-size: var(--step-1); font-style: italic; font-weight: 300; color: var(--gold); }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 2.5rem; }
+  .logo { width: min(100%, 26rem); justify-self: end; height: auto; }
+
+  @media (max-width: 52rem) {
+    .grid { grid-template-columns: 1fr; }
+    .logo { justify-self: start; width: min(70%, 15rem); order: -1; }
+  }
+</style>

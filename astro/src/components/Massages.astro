@@ -1,0 +1,37 @@
+---
+import { massages } from "../data/content";
+---
+<section class="section" id="masaze" aria-labelledby="masaze-title">
+  <div class="container layout">
+    <header class="intro">
+      <h2 id="masaze-title">Masáže &amp; pečující doteky</h2>
+      <p class="lead lead--italic">
+        Masáž, která dává tělu prostor zpomalit. Každá péče vzniká podle toho, co vaše tělo právě potřebuje.
+      </p>
+    </header>
+
+    <ul class="list">
+      {massages.map((m) => (
+        <li>
+          <h3>{m.title}</h3>
+          <p>{m.text}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .section { padding-top: clamp(1.5rem, 4vw, 3rem); }
+  .layout { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+  .intro { position: sticky; top: calc(var(--header-h) + 2rem); display: grid; gap: 1.5rem; }
+  .list { list-style: none; padding: 0; }
+  .list li { display: grid; gap: 0.5rem; padding-block: 1.75rem; border-top: 1px solid rgb(92 74 61 / 0.25); }
+  .list li:last-child { border-bottom: 1px solid rgb(92 74 61 / 0.25); }
+  .list li:first-child { padding-top: 0; border-top: 0; }
+
+  @media (max-width: 52rem) {
+    .layout { grid-template-columns: 1fr; }
+    .intro { position: static; }
+  }
+</style>
