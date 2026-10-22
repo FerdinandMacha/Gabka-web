@@ -55,11 +55,11 @@ export const plasma = {
     "úleva od bolesti a napětí pohybového aparátu",
   ],
   disclaimer:
-    "Upozornění: jedno sezení nemusí být vždy dostačující a je potřeba působení frekvencí opakovat. Ideální je 3× v intervalu max. 5 dní. Plazmový generátor Rifetech je experimentální přístroj a nenahrazuje lékařskou péči, není zamýšlen k léčení nemocí. Není zdravotnický prostředek.",
+    "Upozornění: jedno sezení nemusí být vždy dostačující a je potřeba působení frekvencí opakovat. Ideální je 3× v intervalu max. 5 dní. Plazmový generátor Royal Diamond Plasma je experimentální přístroj a nenahrazuje lékařskou péči, není zamýšlen k léčení nemocí. Není zdravotnický prostředek.",
 };
 
 export const bemer = {
-  subtitle: "Certifikovaná neinvazivní péče",
+  subtitle: "Fyzikální cévní terapie",
   text: "BEMER je jemná, neinvazivní metoda, která pomocí cílených nízkofrekvenčních elektromagnetických pulzů rozproudí život v těch nejjemnějších vlásečnicích našeho těla. Otvírá cestu k přirozené obnově buněčné energie – buňky získávají maximální přísun kyslíku i živin, zatímco nahromaděné odpadní látky mohou z těla v lehkosti odejít.",
   benefits: [
     "uvolňuje svalové napětí a dodává buňkám novou energii",
