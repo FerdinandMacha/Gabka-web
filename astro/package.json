@@ -12,6 +12,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "@fontsource-variable/montserrat": "^5.2.0",
     "astro": "^7.3.8"
   }

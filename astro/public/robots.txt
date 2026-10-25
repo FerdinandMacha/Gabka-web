@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vlny-regenerace.cz/sitemap-index.xml
