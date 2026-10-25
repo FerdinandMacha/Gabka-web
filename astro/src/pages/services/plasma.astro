@@ -1,0 +1,22 @@
+---
+import Base from "../../layouts/Base.astro";
+import Frequency from "../../components/Frequency.astro";
+---
+<Base
+  title="Frekvenční péče | Ostrava Třebovice – Na Vlně regenerace"
+  description="Frekvenční péče plasmovým generátorem Royal Diamond Plasma v Ostravě Třebovicích. Informace o programech, průběhu a důležitých upozorněních."
+>
+  <section class="page-intro">
+    <div class="container">
+      <h1>Frekvenční péče v Ostravě Třebovicích</h1>
+      <p class="lead lead--italic">Seznamte se s péčí plasmového generátoru a jejími možnostmi.</p>
+    </div>
+  </section>
+  <Frequency />
+</Base>
+
+<style>
+  .page-intro { padding-block: clamp(3rem, 7vw, 5rem) 0; }
+  h1 { max-width: 22ch; font-size: var(--step-3); }
+  .lead { margin-top: 1rem; }
+</style>

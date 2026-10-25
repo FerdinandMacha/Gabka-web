@@ -8,14 +8,18 @@ const year = new Date().getFullYear();
     <p class="small">
       Nabízené služby nenahrazují lékařskou péči. Plazmový generátor Royal Diamond Plasma je experimentální přístroj a není zdravotnický prostředek.
     </p>
+    <address>
+      {site.address.street}, {site.address.city}<br />
+      Telefon: <a href={site.phoneHref}>{site.phone}</a>
+    </address>
     <p class="small">© {year} {site.owner} · {site.name}</p>
     <p>
       <a
-        href="https://maps.app.goo.gl/43qXKxkiPuSR1cedA"
+        href={site.mapUrl}
         target="_blank"
         rel="noopener noreferrer"
       >
-        Najdete nás na Googlu
+        Zobrazit adresu na mapě
       </a>
     </p>
   </div>
@@ -24,6 +28,8 @@ const year = new Date().getFullYear();
 <style>
   .footer { background: #4A3B30; color: var(--cream); padding-block: 2.5rem; }
   .container { display: grid; gap: 0.75rem; }
+  address { font-style: normal; line-height: 1.7; }
+  address a { color: inherit; }
   .motto { font-weight: 600; letter-spacing: 0.06em; color: var(--cream-text); }
   .small { font-size: var(--step--1); opacity: 0.85; max-width: 80ch; }
 </style>

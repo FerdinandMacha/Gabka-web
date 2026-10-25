@@ -14,11 +14,11 @@ export const site = {
 };
 
 export const nav = [
-  { label: "Masáže", href: "#masaze" },
-  { label: "Plasma", href: "#plasma" },
-  { label: "BEMER", href: "#bemer" },
-  { label: "Ceník", href: "#cenik" },
-  { label: "Kontakt", href: "#kontakt" },
+  { label: "Masáže", href: "/services/massages/" },
+  { label: "Plasma", href: "/services/plasma/" },
+  { label: "BEMER", href: "/services/bemer/" },
+  { label: "Ceník", href: "/#cenik" },
+  { label: "Kontakt", href: "/#kontakt" },
 ];
 
 export const massages = [

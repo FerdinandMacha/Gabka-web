@@ -1,0 +1,22 @@
+---
+import Base from "../../layouts/Base.astro";
+import Massages from "../../components/Massages.astro";
+---
+<Base
+  title="Masáže | Ostrava Třebovice – Na Vlně regenerace"
+  description="Relaxační a regenerační masáže, Access Bars, An Mo a Lifting Pamper Face v Ostravě Třebovicích. Péče podle toho, co vaše tělo právě potřebuje."
+>
+  <section class="page-intro">
+    <div class="container">
+      <h1>Masáže a pečující doteky v Ostravě Třebovicích</h1>
+      <p class="lead lead--italic">Dopřejte si chvíli zpomalení a péči vybranou podle potřeb vašeho těla.</p>
+    </div>
+  </section>
+  <Massages />
+</Base>
+
+<style>
+  .page-intro { padding-block: clamp(3rem, 7vw, 5rem) 0; }
+  h1 { max-width: 22ch; font-size: var(--step-3); }
+  .lead { margin-top: 1rem; }
+</style>
