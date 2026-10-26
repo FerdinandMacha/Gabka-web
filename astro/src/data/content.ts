@@ -9,7 +9,7 @@ export const site = {
   phoneHref: "tel:+420777554590",
   email: "vlny.regenerace@seznam.cz",
   address: { street: "Kpt. Jaroše 5089/22", city: "Ostrava Třebovice" },
-  mapUrl: "https://mapy.cz/zakladni?q=Kpt.%20Jaro%C5%A1e%205089%2F22%20Ostrava",
+  mapUrl: "https://mapy.com/s/pepecadame",
   price: { amount: "800 Kč", unit: "hodina" },
 };
 
