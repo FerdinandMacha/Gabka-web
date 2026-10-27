@@ -50,7 +50,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Container]
-Image=docker.io/louislam/uptime-kuma:release
+Image=docker.io/louislam/uptime-kuma:2
 ContainerName=uptime-kuma
 PublishPort=3001:3001
 
